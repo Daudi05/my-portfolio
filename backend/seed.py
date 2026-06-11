@@ -15,14 +15,14 @@ if __name__ == "__main__":
 
             # Projects
             projects = [
-                ("Davi's Restaurant","lumiere-restaurant","Full-stack restaurant management system with M-Pesa payment integration, real-time order tracking, admin dashboard with analytics, and PDF receipt generation.",
+                ("Lumière Restaurant App","lumiere-restaurant","Full-stack restaurant management system with M-Pesa payment integration, real-time order tracking, admin dashboard with analytics, and PDF receipt generation.",
                  "Built a complete restaurant management platform handling the entire customer journey from browsing to payment. Includes role-based access control (manager/customer/guest), real-time cart management, M-Pesa STK Push integration with payment confirmation polling, and automated PDF receipt generation using ReportLab.",
                  "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
                  "https://lumiere.davidwege.dev","https://github.com/davidwege/lumiere",
                  ["React","Flask","PostgreSQL","M-Pesa API","ReportLab","JWT","Python"],
                  "Full Stack","The main challenge was implementing reliable M-Pesa payment confirmation since the STK Push callback depends on network availability. I built a polling mechanism that checks payment status every 4 seconds as a fallback.",
                  "Reduced restaurant order processing time by 60%. Achieved 99.9% payment success rate after implementing dual confirmation (callback + polling).", True),
-                ("Nyabera Secondary School School Management","prestige-academy","Enterprise school management system with student/parent/teacher portals, admissions workflow, fee payment via M-Pesa, and comprehensive admin dashboard.",
+                ("Prestige Academy School Management","prestige-academy","Enterprise school management system with student/parent/teacher portals, admissions workflow, fee payment via M-Pesa, and comprehensive admin dashboard.",
                  "Built an enterprise-grade school ERP system managing 2,400+ students. Features include role-based portals for 5 user types, automated attendance tracking, real-time grade management, fee collection with M-Pesa integration, and a analytics dashboard with Recharts visualizations.",
                  "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800",
                  "https://academy.davidwege.dev","https://github.com/davidwege/prestige-academy",
@@ -193,7 +193,7 @@ def roles(*allowed):
             # Testimonials
             testimonials = [
                 ("Sarah Mitchell","Product Manager","TechCorp Kenya","David delivered our restaurant management system 2 weeks ahead of schedule. The M-Pesa integration worked flawlessly from day one. His code is clean, well-documented, and the admin dashboard exceeded our expectations. Highly recommend!",None,5),
-                ("James Otieno","CTO","Nyabera Secondary School","We hired David to build our school management system and he delivered an enterprise-grade solution that now manages 2,400+ students. His attention to detail and ability to translate complex requirements into elegant code is exceptional.",None,5),
+                ("James Otieno","CTO","Prestige Academy","We hired David to build our school management system and he delivered an enterprise-grade solution that now manages 2,400+ students. His attention to detail and ability to translate complex requirements into elegant code is exceptional.",None,5),
                 ("Amina Hassan","Startup Founder","EduTech Nairobi","David built our e-learning platform from scratch in 3 months. He proposed several improvements we hadn't considered that significantly improved the user experience. Professional, communicative, and highly skilled.",None,5),
             ]
             for t in testimonials:

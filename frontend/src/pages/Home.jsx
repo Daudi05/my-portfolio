@@ -47,8 +47,8 @@ export default function Home(){
                 <img src="/Myimage.jpeg" alt="David Wege"/>
               </div>
               <div className="avatar-ring"/>
-              <div className="avatar-float card1">🍽️ Davi's Restaurant</div>
-              <div className="avatar-float card2">🏫 Nyabera Secondary</div>
+              <div className="avatar-float card1"><Code2 size={16}/> React Dev</div>
+              <div className="avatar-float card2">🇰🇪 Nairobi</div>
               <div className="avatar-float card3">⚡ Available</div>
             </div>
           </div>
