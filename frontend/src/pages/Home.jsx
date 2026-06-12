@@ -14,10 +14,52 @@ const SKILLS={
 };
 const SKILL_ICONS={Frontend:<Code2 size={18}/>,Backend:<Server size={18}/>,Database:<Database size={18}/>,'Cloud & DevOps':<Cloud size={18}/>,Payments:<span>💳</span>};
 
+const FEATURED_PROJECTS = [
+  {
+    id: 1,
+    title: 'Nyabera Secondary School',
+    category: 'Education',
+    description: 'A full-featured school management web platform for Nyabera Secondary School, handling student records, timetables, announcements, and staff administration.',
+    image_url: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80',
+    technologies: ['React', 'Flask', 'PostgreSQL', 'Tailwind'],
+    demo_url: null,
+    slug: 'nyabera-secondary-school',
+  },
+  {
+    id: 2,
+    title: 'Davis Restaurant',
+    category: 'Hospitality',
+    description: 'A modern restaurant website for Davis Restaurant featuring an online menu, table reservations, M-Pesa payment integration, and an admin dashboard for order management.',
+    image_url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80',
+    technologies: ['React', 'Node.js', 'MongoDB', 'M-Pesa Daraja'],
+    demo_url: null,
+    slug: 'davis-restaurant',
+  },
+  {
+    id: 3,
+    title: "Danis Choice",
+    category: 'E-Commerce',
+    description: "An elegant e-commerce platform for Danis Choice, a ladies' fashion store selling clothes, shoes, and bags — complete with product listings, a shopping cart, and M-Pesa checkout.",
+    image_url: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80',
+    technologies: ['React', 'Flask', 'PostgreSQL', 'Stripe'],
+    demo_url: null,
+    slug: 'danis-choice',
+  },
+  {
+    id: 4,
+    title: 'Mkopo',
+    category: 'Fintech',
+    description: 'A loan management platform for Mkopo, an institution offering personal and business loans — featuring loan applications, repayment tracking, and M-Pesa disbursement integration.',
+    image_url: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80',
+    technologies: ['React', 'Flask', 'PostgreSQL', 'M-Pesa Daraja'],
+    demo_url: null,
+    slug: 'mkopo',
+  },
+];
+
 export default function Home(){
-  const [projects,setProjects]=useState([]);const [testimonials,setTestimonials]=useState([]);const [stats,setStats]=useState(null);
+  const [testimonials,setTestimonials]=useState([]);const [stats,setStats]=useState(null);
   useEffect(()=>{
-    api.get('/projects?featured=true').then(r=>setProjects(r.data.data.slice(0,3))).catch(()=>{});
     api.get('/portfolio/testimonials').then(r=>setTestimonials(r.data.data)).catch(()=>{});
     api.get('/portfolio/stats').then(r=>setStats(r.data.data)).catch(()=>{});
   },[]);
@@ -100,13 +142,15 @@ export default function Home(){
             <Link to="/projects" className="btn btn-outline btn-sm">All Projects <ArrowRight size={14}/></Link>
           </div>
           <div className="projects-grid">
-            {projects.map(p=>(
+            {FEATURED_PROJECTS.map(p=>(
               <div key={p.id} className="project-card card">
                 <div className="proj-img-wrap">
-                  {p.image_url?<img src={p.image_url} alt={p.title} className="proj-img"/>:<div className="proj-img-placeholder"><Code2 size={32}/></div>}
+                  {p.image_url
+                    ? <img src={p.image_url} alt={p.title} className="proj-img"/>
+                    : <div className="proj-img-placeholder"><Code2 size={32}/></div>
+                  }
                   <div className="proj-overlay">
                     {p.demo_url&&<a href={p.demo_url} target="_blank" rel="noreferrer" className="btn btn-sm btn-primary"><ExternalLink size={14}/>Demo</a>}
-                    
                   </div>
                 </div>
                 <div className="proj-body">
@@ -155,7 +199,6 @@ export default function Home(){
           <span className="section-tag">Let's Work Together</span>
           <h2>Ready to Build Something<br/><span className="gradient-text">Amazing?</span></h2>
           <p>I'm available for freelance projects and full-time roles. Let's discuss how I can help bring your vision to life.</p>
-          
         </div>
       </section>
     </div>
