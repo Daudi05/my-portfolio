@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react';
 import {Link,NavLink,Outlet,useNavigate} from 'react-router-dom';
-import {LayoutDashboard,FolderOpen,FileText,MessageSquare,Star,LogOut,Plus} from 'lucide-react';
+import {LayoutDashboard,FolderOpen,FileText,MessageSquare,Star,LogOut,Plus,Trash2} from 'lucide-react';
 import api from '../../utils/api';
 import {useAdmin} from '../../context/AuthContext';
 import {useToast} from '../../context/ToastContext';
@@ -59,9 +59,18 @@ export function AdminOverview(){
 export function AdminProjects(){
   const toast=useToast();
   const [projects,setProjects]=useState([]);
+  const [confirmId,setConfirmId]=useState(null); // ← replaces window.confirm
+
   const load=()=>api.get('/projects').then(r=>setProjects(r.data.data)).catch(()=>{});
   useEffect(()=>{load();},[]);
-  const del=async id=>{if(!window.confirm('Delete?')) return;await api.delete(`/projects/${id}`);toast('Deleted','info');load();};
+
+  const del=async id=>{
+    await api.delete(`/projects/${id}`);
+    toast('Deleted','info');
+    setConfirmId(null);
+    load();
+  };
+
   return(
     <div style={{padding:32}}>
       <div style={{display:'flex',justifyContent:'space-between',marginBottom:24}}>
@@ -70,15 +79,36 @@ export function AdminProjects(){
       </div>
       <div className="card" style={{overflow:'hidden'}}>
         <table style={{width:'100%',borderCollapse:'collapse',fontSize:'.875rem'}}>
-          <thead><tr style={{background:'var(--surface2)'}}>{['Title','Category','Featured','Actions'].map(h=><th key={h} style={{textAlign:'left',padding:'10px 16px',borderBottom:'1px solid var(--border)',fontSize:'.72rem',textTransform:'uppercase',color:'var(--text3)',letterSpacing:.5}}>{h}</th>)}</tr></thead>
-          <tbody>{projects.map(p=>(
-            <tr key={p.id} style={{borderBottom:'1px solid var(--border)'}}>
-              <td style={{padding:'12px 16px',fontWeight:600}}>{p.title}</td>
-              <td style={{padding:'12px 16px',color:'var(--text2)'}}>{p.category}</td>
-              <td style={{padding:'12px 16px'}}>{p.featured?'⭐':'—'}</td>
-              <td style={{padding:'12px 16px'}}><button className="btn btn-sm btn-outline" style={{marginRight:6,padding:'4px 10px',fontSize:'.78rem'}} onClick={()=>del(p.id)}>Delete</button></td>
+          <thead>
+            <tr style={{background:'var(--surface2)'}}>
+              {['Title','Category','Featured','Actions'].map(h=>(
+                <th key={h} style={{textAlign:'left',padding:'10px 16px',borderBottom:'1px solid var(--border)',fontSize:'.72rem',textTransform:'uppercase',color:'var(--text3)',letterSpacing:.5}}>{h}</th>
+              ))}
             </tr>
-          ))}</tbody>
+          </thead>
+          <tbody>
+            {projects.map(p=>(
+              <tr key={p.id} style={{borderBottom:'1px solid var(--border)'}}>
+                <td style={{padding:'12px 16px',fontWeight:600}}>{p.title}</td>
+                <td style={{padding:'12px 16px',color:'var(--text2)'}}>{p.category}</td>
+                <td style={{padding:'12px 16px'}}>{p.featured?'⭐':'—'}</td>
+                <td style={{padding:'12px 16px'}}>
+                  {confirmId===p.id ? (
+                    // Inline confirmation — no window.confirm needed
+                    <span style={{display:'flex',alignItems:'center',gap:8}}>
+                      <span style={{fontSize:'.78rem',color:'var(--text2)'}}>Sure?</span>
+                      <button className="btn btn-sm" style={{padding:'3px 10px',fontSize:'.78rem',background:'#ef4444',color:'white',border:'none',borderRadius:6,cursor:'pointer'}} onClick={()=>del(p.id)}>Yes, delete</button>
+                      <button className="btn btn-sm btn-outline" style={{padding:'3px 10px',fontSize:'.78rem'}} onClick={()=>setConfirmId(null)}>Cancel</button>
+                    </span>
+                  ) : (
+                    <button className="btn btn-sm btn-outline" style={{padding:'4px 10px',fontSize:'.78rem',display:'inline-flex',alignItems:'center',gap:4}} onClick={()=>setConfirmId(p.id)}>
+                      <Trash2 size={12}/>Delete
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>
