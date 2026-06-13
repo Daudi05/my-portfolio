@@ -61,7 +61,7 @@ export function AdminProjects(){
   const [projects,setProjects]=useState([]);
   const load=()=>api.get('/projects').then(r=>setProjects(r.data.data)).catch(()=>{});
   useEffect(()=>{load();},[]);
-  const del=async id=>{if(!confirm('Delete?')) return;await api.delete(`/projects/${id}`);toast('Deleted','info');load();};
+  const del=async id=>{if(!window.confirm('Delete?')) return;await api.delete(`/projects/${id}`);toast('Deleted','info');load();};
   return(
     <div style={{padding:32}}>
       <div style={{display:'flex',justifyContent:'space-between',marginBottom:24}}>
