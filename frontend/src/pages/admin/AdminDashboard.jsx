@@ -59,7 +59,7 @@ export function AdminOverview(){
 export function AdminProjects(){
   const toast=useToast();
   const [projects,setProjects]=useState([]);
-  const [confirmId,setConfirmId]=useState(null); 
+  const [deleteId,setDeleteId]=useState(null); 
 
   const load=()=>api.get('/projects').then(r=>setProjects(r.data.data)).catch(()=>{});
   useEffect(()=>{load();},[]);
@@ -67,7 +67,7 @@ export function AdminProjects(){
   const del=async id=>{
     await api.delete(`/projects/${id}`);
     toast('Deleted','info');
-    setConfirmId(null);
+    setDeleteId(null);
     load();
   };
 
@@ -93,15 +93,15 @@ export function AdminProjects(){
                 <td style={{padding:'12px 16px',color:'var(--text2)'}}>{p.category}</td>
                 <td style={{padding:'12px 16px'}}>{p.featured?'⭐':'—'}</td>
                 <td style={{padding:'12px 16px'}}>
-                  {confirmId===p.id ? (
+                  {deleteId===p.id ? (
                     
                     <span style={{display:'flex',alignItems:'center',gap:8}}>
                       <span style={{fontSize:'.78rem',color:'var(--text2)'}}>Sure?</span>
                       <button className="btn btn-sm" style={{padding:'3px 10px',fontSize:'.78rem',background:'#ef4444',color:'white',border:'none',borderRadius:6,cursor:'pointer'}} onClick={()=>del(p.id)}>Yes, delete</button>
-                      <button className="btn btn-sm btn-outline" style={{padding:'3px 10px',fontSize:'.78rem'}} onClick={()=>setConfirmId(null)}>Cancel</button>
+                      <button className="btn btn-sm btn-outline" style={{padding:'3px 10px',fontSize:'.78rem'}} onClick={()=>setDeleteId(null)}>Cancel</button>
                     </span>
                   ) : (
-                    <button className="btn btn-sm btn-outline" style={{padding:'4px 10px',fontSize:'.78rem',display:'inline-flex',alignItems:'center',gap:4}} onClick={()=>setConfirmId(p.id)}>
+                    <button className="btn btn-sm btn-outline" style={{padding:'4px 10px',fontSize:'.78rem',display:'inline-flex',alignItems:'center',gap:4}} onClick={()=>setDeleteId(p.id)}>
                       <Trash2 size={12}/>Delete
                     </button>
                   )}
