@@ -184,3 +184,12 @@
 
   .cta-section{padding:52px 0}
 }
+@media(max-width:768px){
+  .container{
+    padding-left:20px !important;
+    padding-right:20px !important;
+  }
+  .home-page{
+    overflow-x:hidden;
+  }
+}
