@@ -1,6 +1,8 @@
 import os
-from dotenv import load_dotenv
-load_dotenv()
+
+if os.getenv("VERCEL") is None:
+    from dotenv import load_dotenv
+    load_dotenv()
 
 from flask import Flask
 from flask_cors import CORS
@@ -30,5 +32,4 @@ app.register_blueprint(uploads_bp,   url_prefix="/api/uploads")
 @app.get("/api/health")
 def health(): return {"status": "ok"}
 
-if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+
