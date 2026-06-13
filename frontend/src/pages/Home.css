@@ -88,6 +88,12 @@
 .cta-section p{color:var(--text2);max-width:500px;margin:0 auto 8px}
 
 /* ══════════════════════════════════════════════════
+   PREVENT HORIZONTAL OVERFLOW GLOBALLY
+══════════════════════════════════════════════════ */
+.home-page{overflow-x:hidden;width:100%}
+.home-page *{box-sizing:border-box}
+
+/* ══════════════════════════════════════════════════
    RESPONSIVE — TABLET (max 1024px)
 ══════════════════════════════════════════════════ */
 @media(max-width:1024px){
@@ -110,6 +116,22 @@
 ══════════════════════════════════════════════════ */
 @media(max-width:768px){
 
+  /* Safe side padding on ALL sections */
+  .hero-section,
+  .stats-section,
+  .skills-section,
+  .projects-section,
+  .testimonials-section,
+  .cta-section{padding-left:20px;padding-right:20px}
+
+  /* Also fix the container if used */
+  .container{
+    padding-left:20px !important;
+    padding-right:20px !important;
+    width:100% !important;
+    max-width:100% !important;
+  }
+
   /* Hero */
   .hero-section{padding-top:80px;min-height:auto}
   .hero-content{
@@ -118,18 +140,24 @@
     gap:0;
     text-align:center;
   }
-  .hero-right{display:none} /* hide avatar on mobile */
-  .hero-left h1{font-size:clamp(2rem,8vw,3rem)}
-  .hero-desc{font-size:.95rem;margin-left:auto;margin-right:auto}
+  .hero-right{display:none}
+  .hero-left h1{font-size:clamp(1.8rem,7vw,2.8rem)}
+  .hero-desc{font-size:.95rem;margin-left:auto;margin-right:auto;max-width:100%}
   .hero-badge{margin-left:auto;margin-right:auto}
   .hero-loc{font-size:.82rem}
   .hero-actions{
     justify-content:center;
     flex-direction:column;
     align-items:center;
+    width:100%;
   }
   .hero-actions a,
-  .hero-actions button{width:100%;max-width:280px;justify-content:center}
+  .hero-actions button{
+    width:100%;
+    max-width:300px;
+    justify-content:center;
+    text-align:center;
+  }
   .hero-socials{justify-content:center}
 
   /* Stats */
@@ -137,11 +165,12 @@
   .stat-box{
     border-right:none;
     border-bottom:1px solid var(--border);
-    padding:20px;
+    padding:20px 12px;
   }
   .stat-box:nth-child(odd){border-right:1px solid var(--border)}
   .stat-box:nth-last-child(-n+2){border-bottom:none}
   .stat-val{font-size:1.8rem}
+  .stat-label{font-size:.72rem;letter-spacing:.5px}
 
   /* Skills */
   .skills-grid{grid-template-columns:1fr}
@@ -154,42 +183,54 @@
     align-items:flex-start;
     margin-bottom:28px;
   }
+  .proj-body{padding:16px}
 
   /* Testimonials */
   .testimonials-grid{grid-template-columns:1fr}
   .testimonial-card{padding:20px}
 
   /* CTA */
-  .cta-section{padding:72px 0}
+  .cta-section{padding-top:72px;padding-bottom:72px}
   .cta-section h2{font-size:clamp(1.6rem,6vw,2.4rem)}
-  .cta-section p{font-size:.9rem;padding:0 8px}
+  .cta-section p{font-size:.9rem;padding:0}
 }
 
 /* ══════════════════════════════════════════════════
    RESPONSIVE — SMALL PHONES (max 480px)
 ══════════════════════════════════════════════════ */
 @media(max-width:480px){
-  .hero-left h1{font-size:1.9rem}
-  .hero-title{font-size:.95rem}
-  .hero-desc{font-size:.88rem}
 
-  .stat-val{font-size:1.5rem}
-  .stat-label{font-size:.72rem}
+  .hero-section,
+  .stats-section,
+  .skills-section,
+  .projects-section,
+  .testimonials-section,
+  .cta-section{padding-left:16px;padding-right:16px}
 
-  .proj-body{padding:14px}
-  .proj-title{font-size:.95rem}
-
-  .testimonial-card{padding:16px}
-  .testimonial-text{font-size:.85rem}
-
-  .cta-section{padding:52px 0}
-}
-@media(max-width:768px){
   .container{
-    padding-left:20px !important;
-    padding-right:20px !important;
+    padding-left:16px !important;
+    padding-right:16px !important;
   }
-  .home-page{
-    overflow-x:hidden;
-  }
+
+  .hero-left h1{font-size:1.75rem}
+  .hero-title{font-size:.9rem}
+  .hero-desc{font-size:.85rem}
+  .hero-actions a,
+  .hero-actions button{max-width:100%}
+
+  .stat-val{font-size:1.4rem}
+  .stat-label{font-size:.68rem}
+
+  .skill-card{padding:14px}
+  .skill-tag{font-size:.72rem;padding:3px 8px}
+
+  .proj-body{padding:12px}
+  .proj-title{font-size:.92rem}
+  .proj-desc{font-size:.8rem}
+
+  .testimonial-card{padding:14px}
+  .testimonial-text{font-size:.82rem}
+
+  .cta-section{padding-top:48px;padding-bottom:48px}
+  .cta-section h2{font-size:1.5rem}
 }
