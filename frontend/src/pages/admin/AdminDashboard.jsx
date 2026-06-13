@@ -59,7 +59,7 @@ export function AdminOverview(){
 export function AdminProjects(){
   const toast=useToast();
   const [projects,setProjects]=useState([]);
-  const [confirmId,setConfirmId]=useState(null); // ← replaces window.confirm
+  const [confirmId,setConfirmId]=useState(null); 
 
   const load=()=>api.get('/projects').then(r=>setProjects(r.data.data)).catch(()=>{});
   useEffect(()=>{load();},[]);
@@ -94,7 +94,7 @@ export function AdminProjects(){
                 <td style={{padding:'12px 16px'}}>{p.featured?'⭐':'—'}</td>
                 <td style={{padding:'12px 16px'}}>
                   {confirmId===p.id ? (
-                    // Inline confirmation — no window.confirm needed
+                    
                     <span style={{display:'flex',alignItems:'center',gap:8}}>
                       <span style={{fontSize:'.78rem',color:'var(--text2)'}}>Sure?</span>
                       <button className="btn btn-sm" style={{padding:'3px 10px',fontSize:'.78rem',background:'#ef4444',color:'white',border:'none',borderRadius:6,cursor:'pointer'}} onClick={()=>del(p.id)}>Yes, delete</button>
